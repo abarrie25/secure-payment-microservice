@@ -5,6 +5,10 @@ app = Flask(__name__)
 
 SERVICE_ENV = os.getenv("SERVICE_ENV", "production")
 
+@app.route('/', methods=['GET'])
+def root_health():
+    return jsonify({"status": "Payment API running"}), 200
+
 @app.route("/health", methods=["GET"])
 def health_check():
     return jsonify({
@@ -29,3 +33,5 @@ def process_payment():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
+
+
